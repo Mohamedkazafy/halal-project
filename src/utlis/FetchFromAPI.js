@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const BASE_URL = 'https://www.googleapis.com/youtube/v3';
-const API_KEY = 'AIzaSyBev6YOabivthZauOTNROuhxHm8zdhGQEs';
+const API_KEY = 'AIzaSyBrEW1Zea9vMYzse-yaU3HPnNuzXAqSjiw';
 
 const options = {
   params: {
