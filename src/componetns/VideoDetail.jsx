@@ -5,7 +5,7 @@ import { Typography, Box, Stack } from "@mui/material";
 import CheckCircleIcon from "@mui/icons-material/CheckCircle";
 
 import { Videos, Loader } from "./";
-import { fetchFromAPI } from "../utlis/FetchFromAPI";
+import { fetchFromAPI } from "../utils/FetchFromAPI";
 
 const VideoDetail = () => {
   const [videoDetail, setVideoDetail] = useState(null);
@@ -14,13 +14,13 @@ const VideoDetail = () => {
 
   useEffect(() => {
     fetchFromAPI(`videos?part=snippet,statistics&id=${id}`)
-      .then((data) => setVideoDetail(data.items[0]))
+      .then((data) => setVideoDetail(data.items[0]));
 
     fetchFromAPI(`search?part=snippet&relatedToVideoId=${id}&type=video`)
-      .then((data) => setVideos(data.items))
+      .then((data) => setVideos(data.items));
   }, [id]);
 
-  if(!videoDetail?.snippet) return <Loader />;
+  if (!videoDetail?.snippet) return <Loader />;
 
   const { snippet: { title, channelId, channelTitle }, statistics: { viewCount, likeCount } } = videoDetail;
 
@@ -33,9 +33,9 @@ const VideoDetail = () => {
             <Typography color="#fff" variant="h5" fontWeight="bold" p={2}>
               {title}
             </Typography>
-            <Stack direction="row" justifyContent="space-between" sx={{ color: "#fff" }} py={1} px={2} >
+            <Stack direction="row" justifyContent="space-between" sx={{ color: "#fff" }} py={1} px={2}>
               <Link to={`/channel/${channelId}`}>
-                <Typography variant={{ sm: "subtitle1", md: 'h6' }}  color="#fff" >
+                <Typography variant="subtitle1" color="#fff">
                   {channelTitle}
                   <CheckCircleIcon sx={{ fontSize: "12px", color: "gray", ml: "5px" }} />
                 </Typography>
@@ -51,8 +51,8 @@ const VideoDetail = () => {
             </Stack>
           </Box>
         </Box>
-        <Box px={2} py={{ md: 1, xs: 5 }} justifyContent="center" alignItems="center" >
-          <Videos videos={videos} direction="column" />
+        <Box px={2} py={{ md: 1, xs: 5 }} justifyContent="center" alignItems="center">
+          {videos ? <Videos videos={videos} direction="column" /> : <Loader />}
         </Box>
       </Stack>
     </Box>
